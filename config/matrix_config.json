@@ -109,12 +109,6 @@
       }
     },
     "distribution": {
-      "sourceforge": {
-        "enabled": true,
-        "auto_upload": false,
-        "project_name": "tiny-11-releases",
-        "api_key_secret": "SOURCEFORGE_API_KEY"
-      },
       "github_releases": {
         "enabled": true,
         "create_draft": true,

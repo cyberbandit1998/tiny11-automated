@@ -4,7 +4,6 @@
 [![Build Tiny11 Core](https://github.com/kelexine/tiny11-automated/actions/workflows/build-tiny11-core.yml/badge.svg)](https://github.com/kelexine/tiny11-automated/actions/workflows/build-tiny11-core.yml)
 [![Build Nano11](https://github.com/kelexine/tiny11-automated/actions/workflows/build-nano11.yml/badge.svg)](https://github.com/kelexine/tiny11-automated/actions/workflows/build-nano11.yml)
 [![Build Tiny11 Core-Gaming](https://github.com/kelexine/tiny11-automated/actions/workflows/build-tiny11-core-gaming.yml/badge.svg)](https://github.com/kelexine/tiny11-automated/actions/workflows/build-tiny11-core-gaming.yml)
-[![SourceForge Downloads](https://img.shields.io/sourceforge/dt/tiny-11-releases.svg)](https://sourceforge.net/projects/tiny-11-releases/files/latest/download)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 [![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-red?logo=GitHub-Sponsors)](https://github.com/sponsors/kelexine)
@@ -106,13 +105,10 @@ This project is based on the original [tiny11 builder by ntdevlabs](https://gith
 
 ### 📥 Downloads
 
-<a href="https://sourceforge.net/p/tiny-11-releases/"><img alt="Download Tiny 11 Releases" src="https://sourceforge.net/sflogo.php?type=18&amp;group_id=3937094" width=200></a>
-- **Pre-built ISOs**: [SourceForge](https://sourceforge.net/projects/tiny-11-releases/files/) (Primary source)
-- **Sensei's Pre Built ISO**: [SourceForge](https://sourceforge.net/projects/tiny11-automated/files/)
-- **Release Notes**: [GitHub Releases](https://github.com/kelexine/tiny11-automated/releases)
-- **Source Code**: [GitHub Repository](https://github.com/kelexine/tiny11-automated)
+- **Pre-built ISOs**: [GitHub Releases](https://github.com/cyberbandit1998/tiny11-automated/releases) - every build attaches its ISO, checksums and build notes
+- **Source Code**: [GitHub Repository](https://github.com/cyberbandit1998/tiny11-automated)
 
-> 📦 **Every build attaches its ISO and checksums to a GitHub Release.** An ISO over GitHub's 2 GiB per-file limit is attached as numbered parts (`.7z.001`, `.7z.002`, ...): download all parts into one folder, open the `.001` file with [7-Zip](https://www.7-zip.org/), choose **Extract**, then verify the `.iso` against the checksums. SourceForge upload is optional and only runs when its secrets are configured.
+> 📦 **Every build attaches its ISO and checksums to a GitHub Release.** An ISO over GitHub's 2 GiB per-file limit is attached as numbered parts (`.7z.001`, `.7z.002`, ...): download all parts into one folder, open the `.001` file with [7-Zip](https://www.7-zip.org/), choose **Extract**, then verify the `.iso` against the checksums.
 
 ### 🌐 Landing Pages
 
@@ -890,7 +886,6 @@ Full details: **[GAMING.md](GAMING.md)**
 ✨ **Automated download** - Fetches ISO automatically  
 🔐 **Checksum verification** - Validates ISO integrity  
 📦 **GitHub Releases** - ISO + checksums attached to every release (split into parts when over 2 GiB)  
-🚀 **SourceForge deployment** - Automatic release distribution  
 📊 **Build statistics** - Performance metrics tracked
 
 ---
@@ -970,14 +965,12 @@ Full details: **[GAMING.md](GAMING.md)**
 1. Check workflow logs for specific error
 2. Enable `skip_cleanup: true` to preserve artifacts
 3. Verify ISO URL is accessible and correct
-4. Check if SourceForge credentials are configured (for upload)
-5. Ensure GitHub Actions has sufficient runner space
+4. Ensure GitHub Actions has sufficient runner space
 
 **Common causes:**
 - Invalid ISO URL (404 error)
 - Network timeout during download
 - Insufficient runner disk space
-- SourceForge API rate limiting
 
 </details>
 
@@ -1084,8 +1077,7 @@ Get-FileHash -Path "tiny11.iso" -Algorithm SHA256
 ### 🔒 Security Best Practices
 
 ✅ **Download from official sources only**
-  - SourceForge: https://sourceforge.net/projects/tiny-11-releases/
-  - GitHub: https://github.com/kelexine/tiny11-automated
+  - GitHub: https://github.com/cyberbandit1998/tiny11-automated
 
 ✅ **Verify checksums before installation**
   ```powershell
@@ -1128,7 +1120,6 @@ Found a security issue? **DO NOT create a public GitHub issue!**
 - **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** - Community guidelines
 - **[SECURITY.md](SECURITY.md)** - Security policy & reporting
 - **[LICENSE](LICENSE)** - MIT License terms
-- **[SOURCEFORGE_README.md](SOURCEFORGE_README.md)** - SourceForge-specific info
 
 ### 🎓 Tutorials & Guides
 
@@ -1207,7 +1198,6 @@ All contributors are recognized in:
 
 - **🗨️ GitHub Discussions**: [Ask questions](https://github.com/kelexine/tiny11-automated/discussions) - Q&A and ideas
 - **🐛 Issue Tracker**: [Report bugs](https://github.com/kelexine/tiny11-automated/issues) - Bug reports only
-- **📥 SourceForge**: [Download releases](https://sourceforge.net/projects/tiny-11-releases/) - Official ISOs
 - **🔔 Release Notifications**: Watch repository → Custom → Releases
 
 ### Community Stats
@@ -1288,9 +1278,8 @@ The authors (kelexine, ntdevlabs) are **NOT responsible** for:
 ### Official Resources
 
 - **📦 GitHub Repository**: https://github.com/kelexine/tiny11-automated
-- **📥 SourceForge Downloads**: https://sourceforge.net/projects/tiny-11-releases/files/
 - **🐛 Issue Tracker**: https://github.com/kelexine/tiny11-automated/issues
-- **📋 Releases**: https://github.com/kelexine/tiny11-automated/releases (notes only)
+- **📋 Releases**: https://github.com/cyberbandit1998/tiny11-automated/releases (ISOs, checksums and notes)
 - **💬 Discussions**: https://github.com/kelexine/tiny11-automated/discussions
 
 ### Related Projects

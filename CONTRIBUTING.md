@@ -79,7 +79,6 @@ tiny11-automated/
 ├── autounattend.xml         # OOBE bypass for Standard/Core
 ├── autounattend-nano.xml    # OOBE bypass for Nano
 ├── README.md
-├── SOURCEFORGE_README.md
 └── .gitignore
 ```
 
@@ -111,8 +110,6 @@ tiny11-automated/
 9. Create checksums (SHA256, MD5, SHA512)
    ↓
 10. Attach the ISO and checksums to a GitHub Release
-   ↓
-11. Upload to SourceForge (optional)
 ```
 
 ---
@@ -345,7 +342,6 @@ Look for issues tagged `good first issue`:
 
 - **GitHub Issues**: Bug reports and feature requests
 - **GitHub Discussions**: General questions and ideas
-- **SourceForge**: [Download releases](https://sourceforge.net/projects/tiny-11-releases/)
 
 ### Getting Help
 

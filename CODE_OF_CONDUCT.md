@@ -65,7 +65,6 @@ All community members are expected to:
 This Code of Conduct applies within all project spaces, including but not limited to:
 
 - GitHub repository (issues, PRs, discussions, code)
-- SourceForge project page (comments, reviews)
 - Social media mentions and discussions
 - Email communications with maintainers
 - Any other official Tiny11 Automated spaces

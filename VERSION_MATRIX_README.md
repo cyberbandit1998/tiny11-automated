@@ -60,7 +60,7 @@ The Version Matrix Builder automatically monitors for new Windows 11 releases an
                                        ▼
                           ┌──────────────────────────┐
                           │   Builds Complete        │
-                          │   Upload to SourceForge  │
+                          │   Attach ISO to Release  │
                           └──────────────────────────┘
 ```
 
@@ -270,14 +270,7 @@ cat tracked_releases.json | python3 -m json.tool
 
 - No API keys required for UUP Dump
 - Uses `GITHUB_TOKEN` for workflow triggers
-- SourceForge uploads require `SOURCEFORGE_API_KEY` secret
-
-### Adding Secrets
-
-```bash
-# GitHub Settings → Secrets → New repository secret
-SOURCEFORGE_API_KEY: your-api-key-here
-```
+- ISOs are attached to GitHub Releases with the built-in `GITHUB_TOKEN`; no extra secrets are needed
 
 ## 🎨 Customization
 
@@ -322,7 +315,7 @@ python3 scripts/release_detector.py --force 2>&1 | tee detection.log
 **Monitor Build Status:**
 - GitHub Issues: Auto-created for each new release
 - Actions Dashboard: Shows all triggered builds
-- SourceForge: Check upload status
+- Releases: Check that each ISO was attached
 
 ## 🤝 Contributing
 

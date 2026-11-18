@@ -131,7 +131,6 @@ Get-FileHash -Path "Tiny11-*.iso" -Algorithm SHA256
 
 # Compare with official checksum from:
 # - GitHub Release page
-# - SourceForge release notes
 ```
 
 ```bash
@@ -147,8 +146,7 @@ shasum -a 256 Tiny11-*.iso
 1. **Test in VM first** - Use VirtualBox/Hyper-V before bare metal
 2. **Backup data** - Always backup before installing modified Windows
 3. **Verify source** - Only download from official sources:
-   - GitHub: https://github.com/kelexine/tiny11-automated
-   - SourceForge: https://sourceforge.net/projects/tiny-11-releases/
+   - GitHub: https://github.com/cyberbandit1998/tiny11-automated
 4. **Check signatures** - Verify release authenticity
 5. **Keep updated** - Use latest releases for security patches
 
@@ -202,8 +200,7 @@ shasum -a 256 Tiny11-*.iso
 ### Secret Management
 
 - No hardcoded credentials
-- GitHub Secrets for webhooks
-- SourceForge tokens rotated regularly
+- GitHub Secrets for any tokens
 - No API keys in public repos
 
 ---
@@ -228,14 +225,12 @@ When security issues are fixed:
 
 1. **GitHub Security Advisory** - Published after fix
 2. **Release Notes** - Detailed changelog
-3. **SourceForge Update** - New files posted
-4. **README Badge** - Version update
+3. **README Badge** - Version update
 
 ### Staying Informed
 
 - ⭐ **Star the repo** - Get release notifications
 - 📺 **Watch releases** - GitHub "Custom" → Releases only
-- 📧 **Email notifications** - SourceForge updates
 
 ---
 

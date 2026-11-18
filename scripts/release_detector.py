@@ -472,7 +472,7 @@ class ReleaseDetector:
 - [ ] Trigger Tiny11 Core build
 - [ ] Trigger Nano11 build
 - [ ] Test builds in VM
-- [ ] Upload to SourceForge
+- [ ] Check the ISOs were attached to the GitHub Releases
 - [ ] Update documentation
 
 **Build Matrix:**

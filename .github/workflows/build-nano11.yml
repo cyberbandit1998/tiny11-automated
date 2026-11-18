@@ -64,7 +64,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Generate folder name and build parameters
+      - name: Generate build parameters
         shell: pwsh
         run: |
           # ISO filename/tag are finalized later in "Verify nano11 ISO creation"
@@ -82,12 +82,6 @@ jobs:
 
           $language = "${{ github.event.inputs.language }}" -replace '[^a-zA-Z]', ''
 
-          # Nano11 specific naming (folder name unchanged)
-          $folderName = "Nano11-$edition-$version"
-
-          Write-Output "Generated folder name: $folderName"
-
-          Add-Content -Path $env:GITHUB_ENV -Value "FOLDER_NAME=$folderName"
           Add-Content -Path $env:GITHUB_ENV -Value "EDITION_NAME=$edition"
           Add-Content -Path $env:GITHUB_ENV -Value "BUILD_DATE=$date"
           Add-Content -Path $env:GITHUB_ENV -Value "BUILD_LANGUAGE=$language"
@@ -428,124 +422,7 @@ jobs:
           $freeGB = [math]::Round($disk.Free / 1GB, 2)
           Write-Output "Available space after cleanup: ${freeGB}GB"
 
-      - name: Check upload configuration
-        id: check-upload
-        shell: pwsh
-        env:
-          SF_KEY: ${{ secrets.SF_SSH_KEY }}
-          ENABLE_UPLOAD: ${{ vars.ENABLE_SOURCEFORGE_UPLOAD }}
-        run: |
-          if ($env:ENABLE_UPLOAD -eq 'true' -or -not [string]::IsNullOrWhiteSpace($env:SF_KEY)) {
-            Write-Output "Upload condition met."
-            "DO_UPLOAD=true" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
-          } else {
-            Write-Output "Upload condition NOT met. Fallback to artifacts."
-            "DO_UPLOAD=false" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
-          }
-
-      - name: Validate SourceForge credentials
-        if: env.DO_UPLOAD == 'true'
-        env:
-          SF_SSH_KEY: ${{ secrets.SF_SSH_KEY }}
-          SF_USERNAME: ${{ secrets.SF_USERNAME }}
-        shell: pwsh
-        run: |
-          if ([string]::IsNullOrWhiteSpace($env:SF_SSH_KEY)) {
-            Write-Error "SF_SSH_KEY secret is not configured"
-            exit 1
-          }
-          if ([string]::IsNullOrWhiteSpace($env:SF_USERNAME)) {
-            Write-Error "SF_USERNAME secret is not configured"
-            exit 1
-          }
-          Write-Output "Credentials validated successfully"
-          
-      - name: Setup SSH for SourceForge
-        if: env.DO_UPLOAD == 'true'
-        shell: pwsh
-        env:
-          SF_PROJECT: ${{ secrets.SF_PROJECT }}
-          SF_SSH_KEY: ${{ secrets.SF_SSH_KEY }}
-          SF_USERNAME: ${{ secrets.SF_USERNAME }}
-        run: |
-          if ([string]::IsNullOrWhiteSpace($env:SF_SSH_KEY)) { Write-Error "Secret SF_SSH_KEY is missing"; exit 1 }
-          
-          if ([string]::IsNullOrWhiteSpace($env:SF_PROJECT)) {
-            $env:SF_PROJECT = "${{ github.event.repository.name }}"
-          }
-          Add-Content -Path $env:GITHUB_ENV -Value "SF_PROJECT=$env:SF_PROJECT"
-          
-          $sshDir = "$env:USERPROFILE\.ssh"
-          if (!(Test-Path $sshDir)) { New-Item -ItemType Directory -Force -Path $sshDir | Out-Null }
-          
-          $keyPath = "$sshDir\sf_key"
-          
-          try {
-            $keyBytes = [System.Convert]::FromBase64String($env:SF_SSH_KEY)
-            [System.IO.File]::WriteAllBytes($keyPath, $keyBytes)
-          } catch {
-            Write-Error "Failed to decode SF_SSH_KEY. Did you Base64 encode it first?"
-            exit 1
-          }
-          
-          icacls $keyPath /c /t /inheritance:d
-          icacls $keyPath /c /t /grant "${env:USERNAME}:F"
-          icacls $keyPath /c /t /remove Administrator "Authenticated Users" BUILTIN\Administrators BUILTIN\Users
-          
-          ssh-keyscan -t rsa,ecdsa,ed25519 frs.sourceforge.net | Out-File -FilePath "$sshDir\known_hosts" -Encoding ascii
-          
-          Write-Output "SSH configuration complete."
-
-      - name: Upload to SourceForge
-        if: env.DO_UPLOAD == 'true'
-        shell: pwsh
-        env:
-          SF_USERNAME: ${{ secrets.SF_USERNAME }}
-          SF_PROJECT: ${{ secrets.SF_PROJECT }}
-          ISO_NAME: ${{ env.ISO_NAME }}
-          FOLDER_NAME: ${{ env.FOLDER_NAME }}
-        run: |
-          $keyPath = "$env:USERPROFILE\.ssh\sf_key"
-
-          Write-Output "Organizing files into folder: $env:FOLDER_NAME"
-          New-Item -ItemType Directory -Force -Path $env:FOLDER_NAME | Out-Null
-
-          Copy-Item $env:ISO_NAME $env:FOLDER_NAME
-          Copy-Item "$env:ISO_NAME.sha256" $env:FOLDER_NAME
-          Copy-Item "$env:ISO_NAME.md5" $env:FOLDER_NAME
-          Copy-Item "$env:ISO_NAME.txt" $env:FOLDER_NAME
-
-          if (Test-Path "SOURCEFORGE_README.md") {
-            Copy-Item "SOURCEFORGE_README.md" $env:FOLDER_NAME
-            Write-Output "Copied SOURCEFORGE_README.md to folder"
-          }
-
-          $remoteRoot = "$env:SF_USERNAME@frs.sourceforge.net:/home/frs/project/$env:SF_PROJECT/"
-
-          Write-Output "Uploading folder..."
-          scp -i $keyPath -r -o StrictHostKeyChecking=no $env:FOLDER_NAME $remoteRoot
-
-          if ($LASTEXITCODE -ne 0) {
-            Write-Error "SCP Upload failed"
-            exit 1
-          }
-          Write-Output "Upload success!"
-
-          $downloadUrl = "https://sourceforge.net/projects/$env:SF_PROJECT/files/$env:RELEASE_TAG/$env:ISO_NAME/download"
-          Add-Content -Path $env:GITHUB_ENV -Value "SF_DOWNLOAD_URL=$downloadUrl"
-          
-      - name: Cleanup SSH credentials
-        if: always()
-        shell: pwsh
-        run: |
-          $keyPath = "$env:USERPROFILE\.ssh\sf_key"
-          if (Test-Path $keyPath) {
-            Remove-Item $keyPath -Force -ErrorAction SilentlyContinue
-            Write-Output "SSH key cleaned up"
-          }
-          
-      - name: Upload ISO as artifact (fallback)
-        if: env.DO_UPLOAD != 'true'
+      - name: Upload ISO as artifact (backup copy)
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ISO_NAME }}
@@ -625,7 +502,6 @@ jobs:
             ### 📥 Download
             The ISO is attached to this release under **Assets** below.
             ${{ env.ISO_SPLIT == 'true' && 'It is over the 2 GiB per-file limit on GitHub, so it is attached as numbered parts (`.7z.001`, `.7z.002`, ...). Download every part into the same folder, open the `.001` file with [7-Zip](https://www.7-zip.org/) and choose **Extract** to get the `.iso`, then check it against the checksums below.' || '' }}
-            ${{ env.SF_DOWNLOAD_URL != '' && format('**SourceForge mirror:** [{0}]({1})', env.ISO_NAME, env.SF_DOWNLOAD_URL) || '' }}
 
             ### 💿 Image Details
             | Property | Value |
@@ -706,7 +582,6 @@ jobs:
 
           ## 📥 Download
           🔗 **GitHub Release:** ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ env.RELEASE_TAG }}
-          ${{ env.SF_DOWNLOAD_URL != '' && format('🔗 **SourceForge:** [{0}]({1})', env.ISO_NAME, env.SF_DOWNLOAD_URL) || '' }}
 
           ## 🔒 Checksums
           **SHA256:** ``````
