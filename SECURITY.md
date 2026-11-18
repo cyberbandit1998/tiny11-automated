@@ -58,11 +58,6 @@ Tiny11 Automated creates modified Windows 11 ISO images with **40,000+ downloads
    - Fill in details
    - kelexine will be notified automatically
 
-3. **Discord (For Urgent Issues)**:
-   - DM kelexine directly
-   - Use `[SECURITY]` prefix
-   - Do not post in public channels
-
 ### What to Include
 
 ```markdown
@@ -137,7 +132,6 @@ Get-FileHash -Path "Tiny11-*.iso" -Algorithm SHA256
 # Compare with official checksum from:
 # - GitHub Release page
 # - SourceForge release notes
-# - Discord #release-notification
 ```
 
 ```bash
@@ -234,15 +228,13 @@ When security issues are fixed:
 
 1. **GitHub Security Advisory** - Published after fix
 2. **Release Notes** - Detailed changelog
-3. **Discord #release-notification** - Immediate alert
-4. **SourceForge Update** - New files posted
-5. **README Badge** - Version update
+3. **SourceForge Update** - New files posted
+4. **README Badge** - Version update
 
 ### Staying Informed
 
 - ⭐ **Star the repo** - Get release notifications
 - 📺 **Watch releases** - GitHub "Custom" → Releases only
-- 🔔 **Join Discord** - Real-time alerts
 - 📧 **Email notifications** - SourceForge updates
 
 ---
@@ -294,7 +286,6 @@ These are intentional design decisions users should understand:
 
 - **Email**: frankiekelechi@gmail.com
 - **GitHub**: @kelexine
-- **Discord**: kelexine (Direct Message)
 - **Security Advisory**: GitHub → Security tab
 
 **Response Hours**: UTC+1 (Africa/Lagos timezone)  

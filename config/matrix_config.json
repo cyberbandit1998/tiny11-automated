@@ -96,11 +96,6 @@
         ],
         "assignees": []
       },
-      "discord": {
-        "enabled": false,
-        "webhook_url_secret": "DISCORD_WEBHOOK",
-        "mention_role_id": null
-      },
       "slack": {
         "enabled": false,
         "webhook_url_secret": "SLACK_WEBHOOK",

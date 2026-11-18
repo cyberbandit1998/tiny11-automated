@@ -183,16 +183,6 @@ jobs:
             echo "ℹ️ No changes to commit"
           fi
       
-      - name: Send Discord Notification - New Releases
-        if: steps.check.outputs.has_new == 'true'
-        continue-on-error: true
-        run: |
-          echo "📢 Sending Discord notification..."
-          python3 scripts/discord_notify.py \
-            --webhook "${{ secrets.DISCORD_WEBHOOK_RELEASES }}" \
-            --type new-releases \
-            --data '${{ steps.check.outputs.new_releases }}' || echo "Discord notification failed (continuing)"
-      
       - name: Create GitHub Issue for New Release
         if: steps.check.outputs.has_new == 'true'
         id: create_issues
@@ -325,52 +315,6 @@ jobs:
             });
             
             console.log(`✅ Build triggered successfully!`);
-
-  notify-completion:
-    name: Send Completion Notification
-    needs: [detect-releases, trigger-builds]
-    if: always() && needs.detect-releases.outputs.has_new == 'true'
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          sparse-checkout: scripts
-          sparse-checkout-cone-mode: false
-      
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      
-      - name: Install Dependencies
-        run: pip install requests
-      
-      - name: Send Discord Notification
-        continue-on-error: true
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_RELEASES }}
-          BUILDS_RESULT: ${{ needs.trigger-builds.result }}
-          NEW_RELEASES: ${{ needs.detect-releases.outputs.new_releases }}
-        run: |
-          echo "📢 Version Matrix Builder completed!"
-          echo "New releases detected: ${{ needs.detect-releases.outputs.has_new }}"
-          echo "Builds triggered: $BUILDS_RESULT"
-          
-            # Calculate build count (releases * 3 variants * 2 editions = 6 builds per release)
-            RELEASES_COUNT=$(echo $NEW_RELEASES | python3 -c "import sys, json; print(len(json.load(sys.stdin)))")
-            BUILDS_COUNT=$((RELEASES_COUNT * 6))
-            
-            # Send Discord notification
-            if [ -n "$DISCORD_WEBHOOK" ]; then
-              python3 scripts/discord_notify.py \
-                --webhook "$DISCORD_WEBHOOK" \
-                --type builds-triggered \
-                --data "{\"builds_count\":$BUILDS_COUNT,\"releases\":$NEW_RELEASES}" || echo "Discord notification failed"
-          else
-            echo "⚠️ DISCORD_WEBHOOK_RELEASES not configured, skipping notification"
-          fi
 
   close-issues:
     name: Auto-Close Release Issues

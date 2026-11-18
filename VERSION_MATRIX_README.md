@@ -330,7 +330,7 @@ Improvements welcome! Areas for enhancement:
 
 - [ ] Add Microsoft Update Catalog as source
 - [ ] Implement checksum verification
-- [ ] Add Discord/Slack notifications
+- [ ] Add Slack notifications
 - [ ] Create web dashboard for tracking
 - [ ] Add automated VM testing
 - [ ] Support multiple languages

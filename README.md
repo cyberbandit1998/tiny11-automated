@@ -112,7 +112,7 @@ This project is based on the original [tiny11 builder by ntdevlabs](https://gith
 - **Release Notes**: [GitHub Releases](https://github.com/kelexine/tiny11-automated/releases)
 - **Source Code**: [GitHub Repository](https://github.com/kelexine/tiny11-automated)
 
-> ⚠️ **ISO files are hosted on SourceForge only.** GitHub Releases contains release notes and checksums.
+> 📦 **Every build attaches its ISO and checksums to a GitHub Release.** An ISO over GitHub's 2 GiB per-file limit is attached as numbered parts (`.7z.001`, `.7z.002`, ...): download all parts into one folder, open the `.001` file with [7-Zip](https://www.7-zip.org/), choose **Extract**, then verify the `.iso` against the checksums. SourceForge upload is optional and only runs when its secrets are configured.
 
 ### 🌐 Landing Pages
 
@@ -143,7 +143,7 @@ Perfect for beginners and automated deployments:
    - Windows ISO URL
    - Edition (Home/Pro/Education)
    - Optional parameters
-5. **Download** ISO from Artifacts or [SourceForge](https://sourceforge.net/projects/tiny-11-releases/)
+5. **Download** the ISO from the **Releases** page of this repository (the build attaches it to the release it creates)
 
 **Build time**: 30-80 minutes depending on variant
 
@@ -889,8 +889,7 @@ Full details: **[GAMING.md](GAMING.md)**
 
 ✨ **Automated download** - Fetches ISO automatically  
 🔐 **Checksum verification** - Validates ISO integrity  
-📢 **Discord notifications** - Real-time build status  
-📦 **Artifact upload** - ISO + checksums available  
+📦 **GitHub Releases** - ISO + checksums attached to every release (split into parts when over 2 GiB)  
 🚀 **SourceForge deployment** - Automatic release distribution  
 📊 **Build statistics** - Performance metrics tracked
 
@@ -1197,7 +1196,6 @@ All contributors are recognized in:
 - Release notes
 - CONTRIBUTORS.md file
 - Project README
-- Special Discord role (if applicable)
 
 **By contributing, you agree to our [Code of Conduct](CODE_OF_CONDUCT.md) and [MIT License](LICENSE).**
 
@@ -1207,7 +1205,6 @@ All contributors are recognized in:
 
 ### Connect With Us
 
-- **💬 Discord**: [Join our server](https://discord.gg/xy6uRHvrrN) - Real-time chat & support
 - **🗨️ GitHub Discussions**: [Ask questions](https://github.com/kelexine/tiny11-automated/discussions) - Q&A and ideas
 - **🐛 Issue Tracker**: [Report bugs](https://github.com/kelexine/tiny11-automated/issues) - Bug reports only
 - **📥 SourceForge**: [Download releases](https://sourceforge.net/projects/tiny-11-releases/) - Official ISOs
@@ -1225,9 +1222,8 @@ All contributors are recognized in:
 
 1. **Read the docs** - Check README and wiki first
 2. **Search issues** - Someone may have asked before
-3. **Ask in Discord** - Fastest real-time help
-4. **Create discussion** - For general questions
-5. **File issue** - For confirmed bugs only
+3. **Create discussion** - For general questions
+4. **File issue** - For confirmed bugs only
 
 ---
 

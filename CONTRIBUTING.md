@@ -110,9 +110,9 @@ tiny11-automated/
    ↓
 9. Create checksums (SHA256, MD5, SHA512)
    ↓
-10. Upload to SourceForge
+10. Attach the ISO and checksums to a GitHub Release
    ↓
-11. Discord notifications
+11. Upload to SourceForge (optional)
 ```
 
 ---
@@ -345,7 +345,6 @@ Look for issues tagged `good first issue`:
 
 - **GitHub Issues**: Bug reports and feature requests
 - **GitHub Discussions**: General questions and ideas
-- **Discord Server**: [Tiny11 Auto-Builder](https://discord.gg/YOUR_INVITE) (Real-time chat)
 - **SourceForge**: [Download releases](https://sourceforge.net/projects/tiny-11-releases/)
 
 ### Getting Help
@@ -362,7 +361,6 @@ Contributors are recognized in:
 - Release notes
 - CONTRIBUTORS.md file
 - Project README
-- Special Discord role (if applicable)
 
 ---
 
@@ -385,7 +383,6 @@ By contributing, you agree that your contributions will be licensed under the sa
 - **Author**: kelexine
 - **GitHub**: https://github.com/kelexine
 - **Email**: [Your contact if desired]
-- **Discord**: [Your Discord if desired]
 
 ---
 

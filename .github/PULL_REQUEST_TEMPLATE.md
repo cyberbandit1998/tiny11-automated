@@ -150,7 +150,6 @@ Paste logs here
 - [ ] Merge to `main`
 - [ ] Tag new release
 - [ ] Update SourceForge
-- [ ] Discord announcement
 
 ---
 
